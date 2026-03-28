@@ -229,7 +229,7 @@ function calculateAmount(){
     monthlyChartArray.forEach(e=>{
         totalAmount+=e;
     })
-    object={
+    const object={
         monthlyChartArrayKey: monthlyChartArray,
         barChartArrayKey: barChartArray,
         totalAmountKey:totalAmount,
