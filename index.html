@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Financial Tracker</title>
+</head>
+<body class="m-0 bg-[#0b0e14] ">
+<dialog id="dialogId" class="py-5 m-auto bg-[#161b22] w-50 h-50 rounded-2xl border-3 border-emerald-500 overflow-hidden">
+  <form method="dialog" id="budget-form" class="flex flex-col gap-y-4 items-center justify-center">
+    <label class="text-white font-bold">Enter Budget:</label>
+    <input type="text" pattern="[0-9]*" id="budget-input" name="budget" placeholder="Enter your budget" class="bg-white rounded-full text-center w-[90%]">
+    <div class="flex gap-x-2">
+    <button id="dialog-close-button" value="Cancel" class=" text-white font-bold italic border-2 border-red-700 bg-red-500 p-2 rounded-4xl cursor-pointer">Cancel</button>
+    <button type="submit" value="submit" class="text-white font-bold italic border-2 border-green-700 bg-green-500 p-2 rounded-4xl cursor-pointer">Submit</button>
+    </div>
+  </form>
+</dialog>
+
+    <nav class=" border-b-2 border-emerald-700 flex bg-linear-to-r from-emerald-100 to-emerald-700  items-center h-20 w-full gap-3 p-5">
+        <button id="budget-add-button" class=" backdrop-blur-md italic border-green-600 border-2 font-medium text-white drop-shadow-[0_2px_10px_rgba(57,255,20,5)]   w-fit h-fit bg-green-500/50 rounded-4xl p-2 cursor-pointer" type="button">New Budget</button>
+        <button id="reset-everything-button" class="backdrop-blur-md italic border-red-600 border-2 font-medium text-white drop-shadow-[0_0_12px_#EF4444] bg-red-500/60  w-fit h-fit rounded-4xl p-2 cursor-pointer" type="button">Reset</button>
+        <div class=" italic text-white [text-shadow:0_0_20px_rgba(0,196,255,1)] md:text-2xl lg:text-3xl sm:text-xl font-extrabold ml-auto">financial tracker</div>
+    </nav>
+    <main class="flex flex-col m-5 gap-5">
+        <section class="flex flex-col items-center md:mx-2 md:flex-row gap-5 md:items-stretch mx-auto md:flex-1">
+            <form id="expense-form" autocomplete="off" class="text-[#f8fafc] bg-[#161b22] rounded-2xl flex flex-col w-full md:w-1/3 md:h-90 gap-2 border-3 border-emerald-500 p-5">
+                <h2> <b>Add New Expenses</b> </h2>
+                <label for="description">Description</label>
+                <input name="description" type="text" placeholder="Enter Utilities" id="description" required>
+                <label  for="amount">Amount</label>
+                <input name="amount" type="text" pattern="[0-9]*" placeholder="Enter Price" id="amount" required>
+                <label for="category">Category</label>
+                <input name="category" id="category" list="item" placeholder="Select Category" required>
+                <datalist id="item">
+                    <option value="Food"></option>
+                    <option value="Rent"></option>
+                    <option value="Utilities"></option>
+                    <option value="Transportation"></option>
+                    <option value="Entertainment"></option>
+                </datalist>
+                <label for="date">Date</label>
+                <input name="date" type="date"  id="date" required>
+                <button type="submit" id="expense-form-submit" class="border-emerald-700 font-bold border-2 cursor-pointer bg-emerald-400 rounded-3xl p-1">Add Expense</button>
+            </form>
+            <div class="rounded-2xl border-3 p-5 bg-[#161b22] border-emerald-500 flex justify-center items-center w-full md:w-1/3 md:h-90 h-75 ">
+                <canvas  id="myPieChart" ></canvas>
+            </div>
+            <div class="rounded-2xl bg-[#161b22] border-3 w-full md:w-1/3 flex justify-center items-center p-5 border-emerald-500 md:h-90 h-75">
+                <canvas id="myBarChart" ></canvas>
+            </div>
+        </section>
+        <section class="grid grid-rows-4 grid-cols-2 md:grid-rows-2 md:grid-cols-4 gap-5">
+        <div class="p-5  bg-[#161b22] border-3 rounded-2xl row-span-2 col-span-2 border-emerald-500">
+        <span class=" italic text-emerald-500 text-2xl font-bold">Recent Expenses</span>
+        <table class="w-full">
+            <thead class="text-emerald-500">
+            <tr class="border-b border-emerald-200">
+                <th class="pb-2 pt-4 px-2">Date</th>
+                <th class="pb-2 pt-4 px-2">Description</th>
+                <th class="pb-2 pt-4 px-2">Category</th>
+                <th class="pb-2 pt-4 px-2">Amount</th>
+            </tr>
+            </thead>
+            <tbody id="tableBody" class="text-white text-center">
+            <tr class="border-b border-emerald-200">
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+            </tr>
+            <tr class="border-b border-emerald-200">
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+            </tr>
+            <tr class="border-b border-emerald-200">
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+            </tr>
+            <tr class="border-b border-emerald-200">
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+            </tr>
+            <tr class="border-b border-emerald-200">
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+                <td class="p-2">-</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="bg-[#161b22] flex flex-col justify-center items-center text-center gap-y-5 border-emerald-500 border-3 row-span-1 col-span-1 rounded-2xl overflow-clip">
+            <span class=" italic text-xl md:text-2xl font-bold text-emerald-500">Monthly Expenses</span>
+            <span id="totalExpenses" class=" md:text-4xl text-xl font-bold text-white">-</span>
+
+        </div>
+        <div class=" flex flex-col gap-y-5 justify-center items-center bg-[#161b22] border-emerald-500 border-3 row-span-1 col-span-1 rounded-2xl overflow-clip">
+            <span class="italic text-xl text-emerald-500 font-bold md:text-2xl">Highest Category</span>
+            <span id="maxAmountID" class=" md:text-4xl text-xl text-white font-bold ">-</span>
+        </div>
+        <div class=" px-20 flex items-center justify-center bg-[#161b22] border-emerald-500 border-3 row-span-1 col-span-2  rounded-2xl">
+            <div class="rounded-full h-8 border-3 border-emerald-700 overflow-hidden w-full">
+                <div id="filler-progress-bar" class="flex justify-center items-center text-white font-bold bg-emerald-300 h-full transition-all duration-300"></div>
+            </div>
+        </div>
+        </section>
+    </main>
+    <script src="/src/finTrack.js"></script>
+</body>
+</html>

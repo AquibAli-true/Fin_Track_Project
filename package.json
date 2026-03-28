@@ -1,0 +1,19 @@
+{
+  "name": "fintrack_folder",
+  "version": "1.0.0",
+  "description": "Personal Finance Dashboard",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "tailwindcss": "^4.2.2",
+    "vite": "^6.0.0"
+  }
+}
