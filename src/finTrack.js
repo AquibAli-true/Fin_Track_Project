@@ -161,7 +161,7 @@ function progressBar(totalAmount){
     if(percent>80){
         progressBarDiv.style.backgroundColor="red";
     }
-    progressBarDiv.textContent=percent+"%";
+    progressBarDiv.textContent=Math.floor(percent)+"%";
 }
 
 function calculateAmount(){
